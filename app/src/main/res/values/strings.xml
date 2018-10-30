@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Film Ku</string>
+    <string name="app_name">MyMovie</string>
+    <string name="overview">Overview</string>
+    <string name="release">Release Date</string>
 </resources>

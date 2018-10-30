@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_Title = "title";
     public static final String EXTRA_Overview = "overview";
+    public static final String EXTRA_Release = "release";
+    public static final String EXTRA_Rate = "rate";
 
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
@@ -70,8 +72,10 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
                         String overview = hit.getString("overview");
                         String imagePath = hit.getString("poster_path");
                         String imageUrl = "http://image.tmdb.org/t/p/w185" + imagePath;
+                        String release = hit.getString("release_date");
+                        double rate = hit.getDouble("vote_average");
 
-                        mExampleList.add(new Item(imageUrl, title, overview ));
+                        mExampleList.add(new Item(imageUrl, title, overview, release, rate));
                     }
 
                     mAdapter = new Adapter(MainActivity.this, mExampleList);
@@ -120,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         detailIntent.putExtra(EXTRA_URL, clickedItem.getmImageUrl());
         detailIntent.putExtra(EXTRA_Title, clickedItem.getmTitle());
         detailIntent.putExtra(EXTRA_Overview, clickedItem.getmOverview());
+        detailIntent.putExtra(EXTRA_Release, clickedItem.getmRelease());
+        detailIntent.putExtra(EXTRA_Rate, clickedItem.getmRate());
 
         startActivity(detailIntent);
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
     private Context mContext;
-    private ArrayList<Item> mExampleList;
+    private ArrayList<Item> mList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -29,7 +29,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
     public Adapter(Context context, ArrayList<Item> exampleList) {
         mContext = context;
-        mExampleList = exampleList;
+        mList = exampleList;
     }
 
     @Override
@@ -40,34 +40,40 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        Item currentItem = mExampleList.get(position);
+        Item currentItem = mList.get(position);
 
         String imageUrl = currentItem.getmImageUrl();
         String creatorName = currentItem.getmTitle();
         String overview = currentItem.getmOverview();
+        String release = currentItem.getmRelease();
+        double rate = currentItem.getmRate();
 
-
-        holder.mTVCreator.setText(creatorName);
+        holder.mTVTitle.setText(creatorName);
         holder.mTVOverview.setText(overview);
+        holder.mTVRelease.setText(release);
+        holder.mTVRate.setText("Rating: " + rate);
         Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
     }
 
     @Override
     public int getItemCount() {
-        return mExampleList.size();
+        return mList.size();
     }
 
     public class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public Button mId;
         public ImageView mImageView;
-        public TextView mTVCreator;
+        public TextView mTVTitle;
         public TextView mTVOverview;
+        public TextView mTVRelease;
+        public TextView mTVRate;
         public ExampleViewHolder(View itemView) {
             super(itemView);
 
             mImageView = itemView.findViewById(R.id.image_view);
-            mTVCreator = itemView.findViewById(R.id.tv_title);
+            mTVTitle = itemView.findViewById(R.id.tv_title);
             mTVOverview = itemView.findViewById(R.id.tv_overview);
+            mTVRelease = itemView.findViewById(R.id.tv_release);
+            mTVRate = itemView.findViewById(R.id.tv_rate);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
